@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        .main{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto;
+            gap: 20px;
+        }
+        .main> div> img{
+            width: 200px;
+            height: 200px;
+        }
+        .main> div{
+            text-align: center ;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cart Page</h1>
+    <h2>Total Cost</h2>
+    <div class="main"></div>
+</body>
+</html>
+
+<script>
+    let cartItems = JSON.parse(localStorage.getItem("cart"))
+
+    cartItems.map((el)=>{
+        let div = document.createElement("div")
+            let image = document.createElement("img")
+            let title = document.createElement("h3")
+            let desc = document.createElement("p")
+            let price = document.createElement("p")
+            let rating = document.createElement("p")
+
+            image.setAttribute("src", el.image)
+            title.innerText = `${el.title}`
+            desc.textContent = `Desc: ${el.description}`
+            price.textContent = `Price: ${el.price}`
+            rating.textContent = `Rating: ${el.rating.rate}`
+
+            div.append(image, title, desc, price, rating)
+            document.querySelector(".main").append(div)
+    })
+
+    let cartPriceResult = cartItems.reduce((acc, el, index)=>{
+        return acc+el.price
+    }, 0)
+    console.log("cartPriceResult", cartPriceResult);
+    document.querySelector("h2").innerText = `Total Cost: ${cartPriceResult}`
+</script>
