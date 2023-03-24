@@ -1,1 +1,2 @@
 # Fetch-Products
+In this repo, I fetched the items using fetch call and added some functionality like searching, sorting (High to low and Low to high), add items to the cart page and their total amount.
